@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+	<template id="maismetal_report_saleorder_document">
+		<t t-call="aloxa_maismetal.maismetal_external_layout">
+			<div class="page">
+				<link href="/web/static/lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+<!-- COMPROBACIÓN DE SI EXISTEN DESCUENTOS (para incluir, o no, la columna en la tabla-->
+				<t t-set="is_discount" t-value="False"/>
+				<t t-foreach="o.order_line" t-as="l">
+			 		<t t-if="l.discount"><t t-set="is_discount" t-value="True"/></t>
+				</t>
+<!-- TITULOS DEL PRESUPUESTO -->
+			    <div class="row">   
+			    	<div class="col-md-12" style="width:50%;float:right;">
+			        	<table class="table table-bordered">
+			            	<tr>
+			                	<td>
+			                		<address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
+		                		</td>       
+			            	</tr>
+			            </table>
+			     	</div>
+			        <div class="col-md-12" style="width:50%;">
+					    <table class="table table-bordered" style="text-align:center;">
+						    <tr>
+						         <td>Presupuesto/Pedido N°</td>
+						         <td>Fecha:</td>
+						         <td>Código de cliente:</td>
+						    </tr>
+						    <tr>
+						         <td><span t-field="o.name" /></td>
+						         <td><p t-field="o.date_order" t-field-options="{&quot;format&quot;: &quot;d/MM/y&quot;}"/></td>
+						         <td><span t-field="o.partner_id.ref" /></td>
+						    </tr>
+						</table>   
+				    	<table class="table table-bordered" style="text-align:center;">
+						    <tr>
+						         <td>NIF/CIF</td>
+						         <td>Comercial:</td>
+						         <td>Referencia:</td>
+						    </tr>
+						    <tr>
+						         <td><span t-field="o.partner_id.vat" /></td>
+						         <td><span t-field="o.user_id" /></td>
+						         <td><span t-field="o.client_order_ref" /></td>
+						    </tr>
+						</table>
+			 		</div>
+			  	</div>
+<!-- TITULOS DE LA TABLA -->  			
+				<table class="table table-bordered">
+					<thead>
+					    <tr>
+					        <th class="text-right">Cantidad</th>
+					        <th>Descripción</th>
+					        <th class="text-right">Precio unitario</th>
+							<t t-if="is_discount">
+			                	<th class="text-right" groups="sale.group_discount_per_so_line" >Dto. %</th>
+			                </t>   
+			                <th class="text-right" >Impuestos</th>
+			        		<th class="text-right">Valor neto</th>
+			    		</tr>
+					</thead>
+<!-- LINEAS DEL PRESUPUESTO -->
+			        <tr t-foreach="o.order_line" t-as="l">                 
+			        	<td class="text-right">
+			            	<span t-field="l.product_uom_qty"/>
+			            </td>
+			            <td><span t-field="l.name"/></td>
+			            <td class="text-right">
+			            	<span t-field="l.price_unit"/>
+			            </td>
+						<t t-if="is_discount"> <!-- Instead of l.discount, otherwise there is a cell missing and following columns will be shifted -->
+							<td class="text-right" groups="sale.group_discount_per_so_line"><t t-if="l.discount"><span t-field="l.discount"/></t></td>
+						</t>
+						<td class="text-right">
+			            	<span t-esc="', '.join(map(lambda x: x.name, l.tax_id))"/>
+			        	</td>
+				        <td class="text-right">
+				            <span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+				        </td>
+			        </tr>
+				</table>
+<!-- COMENTARIOS DEBAJO DE LA TABLA -->
+				<div class="row" style="float:bottom;position:relative">     
+				    <p t-if="o.note">
+				        <strong>Comentario:</strong>
+				        <span t-field="o.note"/>
+				    </p>        
+				</div> 				
+			</div>
+		</t>
+	</template>
+	
+</data>
+</openerp>

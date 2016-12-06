@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+	<template id="maismetal_report_picking">
+	    <t t-call="report.html_container">
+	        <t t-foreach="doc_ids" t-as="doc_id">
+	            <t t-raw="translate_doc(doc_id, doc_model, 'partner_id.lang', 'aloxa_maismetal.maismetal_report_picking_document')"/>
+	        </t>
+	    </t>
+	</template>
+
+</data>
+</openerp>

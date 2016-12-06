@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+<!-- FACTURAS -->
+
+        <record id="paperformat_euro_portrait_no_margin" model="report.paperformat">
+            <field name="name">European A4 (No margin)</field>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">100</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <record id="account.account_invoices" model="ir.actions.report.xml">
+        	<field name="paperformat_id" ref="aloxa_maismetal.paperformat_euro_portrait_no_margin" />
+        </record>
+        
+<!-- PRESUPUESTOS -->
+        
+        <record id="paperformat_euro_saleorder_maismetal" model="report.paperformat">
+            <field name="name">Papel Presupuestos/Pedidos</field>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">40</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <record id="sale.report_sale_order" model="ir.actions.report.xml">
+        	<field name="paperformat_id" ref="aloxa_maismetal.paperformat_euro_saleorder_maismetal" />
+        </record>
+        
+<!-- ALBARANES -->
+        
+        <record id="paperformat_euro_picking_maismetal" model="report.paperformat">
+            <field name="name">Papel Albaranes</field>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">70</field>
+            <field name="margin_bottom">30</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">60</field>
+            <field name="dpi">90</field>
+        </record>
+        
+        <record id="stock.action_report_picking" model="ir.actions.report.xml">
+        	<field name="report_name" ref="aloxa_maismetal.maismetal_report_picking"/>
+        	<field name="paperformat_id" ref="aloxa_maismetal.paperformat_euro_picking_maismetal"/>
+        </record>
+        
+	</data>
+</openerp>

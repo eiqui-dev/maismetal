@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+	<template id="maismetal_external_layout_header">
+		<link href="/web/static/lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+		<div class="header">
+			<div class="row">    
+				<img style="width:450px; height:150px;" src="/aloxa_maismetal/static/src/img/maismetal.jpg"/>  
+			</div>
+		</div>
+	</template>
+	
+</data>
+</openerp>

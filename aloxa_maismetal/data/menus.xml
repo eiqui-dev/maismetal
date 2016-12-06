@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+<!-- MENUITEMS -->	  
+			
+
+			<menuitem id="maismetal_menu" name="Máis Metal" sequence="1"/>
+			<menuitem id="maismetal_ventas" name="Ventas"
+				      parent="maismetal_menu" sequence="10"/>
+			<menuitem id="maismetal_ventas_presupuestos" name="Presupuestos(Pre)"
+				      parent="maismetal_ventas" sequence="12"
+				      action="sale.action_quotations"/>	      
+			<menuitem id="maismetal_ventas_pedidos" name="Partidas(PV)"
+				      parent="maismetal_ventas" sequence="13"
+				      action="sale.action_orders"/>
+			<menuitem id="maismetal_ventas_albaranes" name="Albaranes(Av)"
+				      parent="maismetal_ventas" sequence="14"
+				      action="sale_stock.outgoing_picking_list_to_invoice"/>	      
+			<menuitem id="maismetal_ventas_facturas" name="Facturas de cliente"
+				      parent="maismetal_ventas" sequence="15"
+				      action="account.action_invoice_tree1"/>  
+				    
+		 	    
+		    <!-- MENU Proyectos para control analítico y de partes de horas-->	  		        	      
+			<menuitem id="maismetal_proyectos" name="Proyectos"
+				      parent="maismetal_menu" sequence="20"/>
+			<menuitem id="maismetal_proyectos_proyectos" name="Proyectos"
+				      parent="maismetal_proyectos" sequence="21"
+				      action="account_analytic_analysis.action_account_analytic_overdue_all"/>
+			<menuitem id="maismetal_proyectos_tareas" name="Tareas"
+				      parent="maismetal_proyectos" sequence="22"
+				      action="project.action_view_task"/>
+			<menuitem id="maismetal_proyectos_tareas" name="Tareas"
+				      parent="maismetal_proyectos" sequence="22"
+				      action="project.action_view_task"/>	      
+			<menuitem id="maismetal_proyectos_partes" name="Partes de horas"
+				      parent="maismetal_proyectos" sequence="23"
+				      action="hr_timesheet_sheet.act_hr_timesheet_sheet_form"/>		      
+			<!-- Coste de los proyectos -->
+			
+			<!-- Partners -->
+			<menuitem id="maismetal_empresas" name="Empresas"
+				      parent="maismetal_menu" />
+			
+			<menuitem id="maismetal_empresas_proveedores" name="Proveedores"
+				      parent="maismetal_empresas" 
+				      action="base.action_partner_supplier_form"/>
+		
+			<menuitem id="maismetal_empresas_cliente" name="Clientes"
+				      parent="maismetal_empresas" 
+				      action="base.action_partner_customer_form"/>
+				      
+			<!-- Productos -->	      
+			<menuitem id="maismetal_productos" name="Productos"
+				      parent="maismetal_menu" />
+				      
+			 <menuitem id="maismetal_productos_productos" name="Productos"
+				      parent="maismetal_productos" 
+				      action="product.product_template_action"/>
+			
+			<menuitem id="maismetal_empresa" name="Mi Empresa"
+				      parent="maismetal_menu" sequence="40"/>
+			<menuitem id="maismetal_compania" name="Datos de Máis Metal"
+				      parent="maismetal_empresa" sequence="41"
+					  action="base.action_res_company_form"/>
+		      
+	</data>
+	
+	
+	
+	
+</openerp>

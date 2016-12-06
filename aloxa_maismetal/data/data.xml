@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+<!-- REGISTROS A CREAR -->
+	<!-- Valor por defecto para notify_email a "none" -->
+	<record id="defaults_res_partner_notify_email" model="ir.values">
+		<field name="name">notify_email</field>
+		<field name="value"><![CDATA[S'none'
+p0
+.]]></field>
+		<field name="key">default</field>
+		<field name="key2"></field>
+		<field name="model">res.partner</field>					 
+	</record>
+	</data>
+</openerp>

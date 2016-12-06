@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<openerp>
+<data>
+
+	<template id="maismetal_external_layout_footer">
+		<div class="footer">		
+			<div class="last-page">
+				<div class="col-md-12" style="width:100%;font-size:12px;color:#00004e !important;">
+					<t t-if="o and 'payment_mode' in o">
+						<p t-if="o.payment_mode_id.note">
+				    		<strong>Payment Mode:</strong>
+				    		<span t-field="o.payment_mode_id.note"/>
+						</p>
+					</t>
+				</div>
+				<div class="col-md-12" style="width:100%;font-size:12px;color:#00004e !important;">
+					<div class="col-xs-6" style="width:50%;float:right;">
+			        	<t t-if="o and 'comment' in o">
+				        	<p t-if="o.comment">
+				            	<strong>Comentario:</strong>
+				                <span t-field="o.comment"/>
+				            </p>
+				        </t>
+				        <t t-if="o and 'fiscal_position' in o">           
+				            <p t-if="o.fiscal_position.note">
+				                <strong>Fiscal Position Remark:</strong>
+				                <span t-field="o.fiscal_position.note"/>
+				            </p>
+				        </t>
+			        </div>
+					<div class="row"> 
+						<div class="col-xs-6" style="color:#00004e !important;">
+			        		<t t-if="o and 'payment_term' in o">
+				        		<p t-if="o.payment_term.note">
+				                	<strong>Payment Term:</strong>
+				                	<span t-field="o.payment_term.note"/>
+				            	</p>
+			            	</t>
+						</div>
+					</div> 
+				</div>
+				<t t-if="o and 'amount_total' in o">	
+				<div class="col-md-2" style="width:20%;float:right;">
+					<table class="table table-bordered" style="text-align:center;color:#00004e !important;">
+						<tr>
+							<td>TOTAL</td>
+						</tr>
+						<tr>			
+							<td><span t-if="o.type == 'out_refund'">-</span><span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+						</tr>
+					</table>
+				</div>
+				</t>
+				<t t-if="o and 'amount_tax' in o">
+				<div class="col-md-10" style="width:80%;">
+					<table class="table table-bordered" style="text-align:center;color:#00004e !important;">
+						<tr>
+							<td>Base</td>
+							<td>Impuestos</td>
+						</tr>
+						<tr>
+							<td><span t-if="o.type == 'out_refund'">-</span><span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+							<td><span t-if="o.type == 'out_refund'">-</span><span t-field="o.amount_tax"/></td>
+						</tr>
+					</table>
+		     	</div>
+		     	</t>
+				<div class="col-md-10" style="width:100%;font-size:">
+		        	<div class="col-xs-6" style="width:50%;float:right;">
+		  				<table class="table table-bordered" style="text-align:center;float:right12px;color:#00004e !important;">
+					    	<t t-if="o and 'date_due' in o">
+						    	<tr>
+						        	<td>Fecha de vencimiento</td>
+						        </tr>
+			       				<tr>
+			           				<td>
+			               				<p><span t-field="o.date_due"/> -------- <span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></p>
+			                        </td>
+			                    </tr>
+			                </t>
+		   				</table>
+					</div>
+					<t t-if="o and 'tax_line' in o">
+			 			<div class="row" t-if="o.tax_line">
+			            	<div class="col-xs-6">
+			                	<table class="table table-condensed">
+			                    	<thead>
+			                        	<tr>
+			                            	<th>Impuesto</th>
+			                                <th class="text-right">Base</th>
+			                                <th class="text-right">Total</th>
+			                            </tr>
+			                        </thead>
+			                        <tbody>
+			                            <tr t-foreach="o.tax_line" t-as="t">
+			                                <td><span t-field="t.name"/></td>
+			                                <td class="text-right">
+			                                    <span t-if="o.type == 'out_refund'">-</span><span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+			                                </td>
+			                                <td class="text-right">
+			                                    <span t-if="o.type == 'out_refund'">-</span><span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+			                                </td>
+			                            </tr>
+			                        </tbody>
+			                    </table>
+			                </div>
+			        	</div>
+		        	</t>
+				</div> 
+			</div> 
+			<p>&amp;nbsp;</p>
+			<span t-esc="o.company_id.rml_footer" />				
+		</div>
+	</template>
+	
+</data>
+</openerp>
