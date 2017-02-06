@@ -48,6 +48,7 @@
                 'hr_timesheet',
                 'hr_timesheet_sheet',
                 'sale_stock',
+                'account_analytic_analysis',
                ],
 
     # always loaded

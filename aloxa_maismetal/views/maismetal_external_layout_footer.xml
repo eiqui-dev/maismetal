@@ -46,7 +46,7 @@
 							<td>TOTAL</td>
 						</tr>
 						<tr>			
-							<td><span t-if="o.type == 'out_refund'">-</span><span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+							<td><span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
 						</tr>
 					</table>
 				</div>
@@ -59,8 +59,8 @@
 							<td>Impuestos</td>
 						</tr>
 						<tr>
-							<td><span t-if="o.type == 'out_refund'">-</span><span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
-							<td><span t-if="o.type == 'out_refund'">-</span><span t-field="o.amount_tax"/></td>
+							<td><span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+							<td><span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="o.amount_tax"/></td>
 						</tr>
 					</table>
 		     	</div>
@@ -95,10 +95,10 @@
 			                            <tr t-foreach="o.tax_line" t-as="t">
 			                                <td><span t-field="t.name"/></td>
 			                                <td class="text-right">
-			                                    <span t-if="o.type == 'out_refund'">-</span><span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+			                                    <span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
 			                                </td>
 			                                <td class="text-right">
-			                                    <span t-if="o.type == 'out_refund'">-</span><span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+			                                    <span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
 			                                </td>
 			                            </tr>
 			                        </tbody>
