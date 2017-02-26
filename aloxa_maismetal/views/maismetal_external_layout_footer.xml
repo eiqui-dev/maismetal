@@ -3,110 +3,112 @@
 <data>
 
 	<template id="maismetal_external_layout_footer">
+		<t t-set="is_outRefund" t-value="'type' in o and o.type == 'out_refund'"/>
+		
 		<div class="footer">
 			<div class="last-page">
-				<div class="col-md-12 col-xs-12" style="font-size:12px;color:#00004e !important;">
-					<t t-if="o and 'payment_mode' in o">
-						<p t-if="o.payment_mode_id.note">
+				<div class="row">
+					<div class="col-md-6 col-xs-6" style="font-size:12px;color:#00004e !important;">
+						<p t-if="o and 'payment_mode' in o and o.payment_mode_id.note">
 				    		<strong>Payment Mode:</strong>
 				    		<span t-field="o.payment_mode_id.note"/>
 						</p>
-					</t>
+					</div>
+					<div class="col-md-6 col-xs-6" style="color:#00004e !important;">
+		        		<p t-if="o and 'payment_term' in o and o.payment_term.note">
+		                	<strong>Payment Term:</strong>
+		                	<span t-field="o.payment_term.note"/>
+		            	</p>
+					</div>
 				</div>
-				<div class="col-md-12 col-xs-12" style="font-size:12px;color:#00004e !important;">
-					<div class="col-md-6 col-xs-6 col-md-offset-6 col-xs-offset-6">
-			        	<t t-if="o and 'comment' in o">
-				        	<p t-if="o.comment">
-				            	<strong>Comentario:</strong>
-				                <span t-field="o.comment"/>
-				            </p>
-				        </t>
-				        <t t-if="o and 'fiscal_position' in o">           
-				            <p t-if="o.fiscal_position.note">
-				                <strong>Fiscal Position Remark:</strong>
-				                <span t-field="o.fiscal_position.note"/>
-				            </p>
-				        </t>
-			        </div>
-					<div class="col-md-12 col-xs-12"> 
-						<div class="col-md-6 col-xs-6" style="color:#00004e !important;">
-			        		<t t-if="o and 'payment_term' in o">
-				        		<p t-if="o.payment_term.note">
-				                	<strong>Payment Term:</strong>
-				                	<span t-field="o.payment_term.note"/>
-				            	</p>
-			            	</t>
-						</div>
-					</div> 
+				<div class="row" style="font-size:12px;color:#00004e !important;">
+					<div class="col-md-6 col-xs-6">       
+			            <p t-if="o and 'fiscal_position' in o and o.fiscal_position.note">
+			                <strong>Fiscal Position Remark:</strong>
+			                <span t-field="o.fiscal_position.note"/>
+			            </p>
+				    </div>
+			        <div class="col-md-6 col-xs-6">
+			        	<p t-if="o and 'comment' in o and o.comment">
+			            	<strong>Comentario:</strong>
+			                <span t-field="o.comment"/>
+			            </p>
+			     	</div>
+			    </div>
+			    <div class="row">
+					<div class="col-md-10 col-xs-10">
+						<table t-if="o and 'amount_tax' in o" class="table table-bordered" style="text-align:center;color:#00004e !important;">
+							<thead>
+								<tr>
+									<td>Base</td>
+									<td>Impuestos</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span t-if="is_outRefund">-</span><span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+									<td><span t-if="is_outRefund">-</span><span t-field="o.amount_tax"/></td>
+								</tr>
+							</tbody>
+						</table>
+			     	</div>
+					<div class="col-md-2 col-xs-2">
+						<table t-if="o and 'amount_total' in o" class="table table-bordered" style="text-align:center;color:#00004e !important;">
+							<thead>
+								<tr>
+									<td>TOTAL</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>			
+									<td><span t-if="is_outRefund">-</span><span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
-				<t t-if="o and 'amount_total' in o">	
-				<div class="col-md-2 col-xs-2 col-md-offset-10 col-xs-offset-10">
-					<table class="table table-bordered" style="text-align:center;color:#00004e !important;">
-						<tr>
-							<td>TOTAL</td>
-						</tr>
-						<tr>			
-							<td><span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
-						</tr>
-					</table>
-				</div>
-				</t>
-				<t t-if="o and 'amount_tax' in o">
-				<div class="col-md-10 col-xs-10">
-					<table class="table table-bordered" style="text-align:center;color:#00004e !important;">
-						<tr>
-							<td>Base</td>
-							<td>Impuestos</td>
-						</tr>
-						<tr>
-							<td><span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="o.amount_untaxed" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></td>
-							<td><span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="o.amount_tax"/></td>
-						</tr>
-					</table>
-		     	</div>
-		     	</t>
-				<div class="col-md-12 col-xs-12" style="font-size:">
+				<div class="row" t-if="o and 'date_due' in o">
 		        	<div class="col-md-6 col-xs-6 col-md-offset-6 col-xs-offset-6">
 		  				<table class="table table-bordered" style="text-align:center;float:right12px;color:#00004e !important;">
-					    	<t t-if="o and 'date_due' in o">
+					    	<thead>
 						    	<tr>
 						        	<td>Fecha de vencimiento</td>
 						        </tr>
+					        </thead>
+					        <tbody>
 			       				<tr>
 			           				<td>
 			               				<p><span t-field="o.date_due"/> -------- <span t-field="o.amount_total" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/></p>
 			                        </td>
 			                    </tr>
-			                </t>
+		                    </tbody>
 		   				</table>
 					</div>
-					<t t-if="o and 'tax_line' in o">
-			 			<div class="col-md-12 col-xs-12" t-if="o.tax_line">
-			            	<div class="col-md-6 col-xs-6">
-			                	<table class="table table-condensed">
-			                    	<thead>
-			                        	<tr>
-			                            	<th>Impuesto</th>
-			                                <th class="text-right">Base</th>
-			                                <th class="text-right">Total</th>
-			                            </tr>
-			                        </thead>
-			                        <tbody>
-			                            <tr t-foreach="o.tax_line" t-as="t">
-			                                <td><span t-field="t.name"/></td>
-			                                <td class="text-right">
-			                                    <span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
-			                                </td>
-			                                <td class="text-right">
-			                                    <span t-if="'type' in o and o.type == 'out_refund'">-</span><span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
-			                                </td>
-			                            </tr>
-			                        </tbody>
-			                    </table>
-			                </div>
-			        	</div>
-		        	</t>
-				</div> 
+				</div>
+				<div class="row" t-if="o and 'tax_line' in o and o.tax_line">
+	            	<div class="col-md-6 col-xs-6">
+	                	<table class="table table-condensed">
+	                    	<thead>
+	                        	<tr>
+	                            	<th>Impuesto</th>
+	                                <th class="text-right">Base</th>
+	                                <th class="text-right">Total</th>
+	                            </tr>
+	                        </thead>
+	                        <tbody>
+	                            <tr t-foreach="o.tax_line" t-as="t">
+	                                <td><span t-field="t.name"/></td>
+	                                <td class="text-right">
+	                                    <span t-if="is_outRefund">-</span><span t-field="t.base" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+	                                </td>
+	                                <td class="text-right">
+	                                    <span t-if="is_outRefund">-</span><span t-field="t.amount" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
+	                                </td>
+	                            </tr>
+	                        </tbody>
+	                    </table>
+	                </div>
+	        	</div>
 			</div> 
 			<p>&amp;nbsp;</p>
 			<span t-esc="o.company_id.rml_footer" />				
