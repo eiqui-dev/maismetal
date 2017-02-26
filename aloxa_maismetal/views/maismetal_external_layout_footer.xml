@@ -110,8 +110,11 @@
 	                </div>
 	        	</div>
 			</div> 
-			<p>&amp;nbsp;</p>
-			<span t-esc="o.company_id.rml_footer" />				
+			<div class="row">
+				<div class="col-md-12 col-xs-12">
+					<span style="font-size:x-small;" t-esc="o.company_id.rml_footer" />
+				</div>
+			</div>		
 		</div>
 	</template>
 	
