@@ -49,6 +49,7 @@
                 'hr_timesheet_sheet',
                 'sale_stock',
                 'account_analytic_analysis',
+                'report_qweb_element_page_visibility',
                ],
 
     # always loaded
@@ -61,13 +62,13 @@
         'views/maismetal_report_saleorder.xml',
         'views/maismetal_report_picking_document.xml',
         'views/maismetal_report_picking.xml',
-        'views/maismetal_report_saleorder_document.xml',        
+        'views/maismetal_report_saleorder_document.xml',
         'views/maismetal_report_invoice_document.xml',
         'views/maismetal_external_layout.xml',
         'views/maismetal_external_layout_footer.xml',
-        'views/maismetal_external_layout_header.xml', 
+        'views/maismetal_external_layout_header.xml',
     ],
     # only loaded in demonstration mode
-    'demo': [        
+    'demo': [
     ],
 }

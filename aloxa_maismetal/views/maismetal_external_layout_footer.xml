@@ -3,7 +3,7 @@
 <data>
 
 	<template id="maismetal_external_layout_footer">
-		<div class="footer">		
+		<div class="footer">
 			<div class="last-page">
 				<div class="col-md-12 col-xs-12" style="font-size:12px;color:#00004e !important;">
 					<t t-if="o and 'payment_mode' in o">

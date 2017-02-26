@@ -12,7 +12,7 @@
 		<t t-call="aloxa_maismetal.maismetal_external_layout">
 			<div class="page">
 <!-- TITULOS DEL PRESUPUESTO -->
-			    <div class="col-md-12 col-xs-12">
+			    <div class="row">
 			   		<div class="col-md-6 col-xs-6">
 					    <table class="table table-bordered" style="text-align:center;">
 					    	<thead>
@@ -43,7 +43,7 @@
 			            </table>
 			     	</div>
 			  	</div>
-			  	<div class="col-md-12 col-xs-12">
+			  	<div class="row">
 				  	<div class="col-md-6 col-xs-6">
 				  		<table class="table table-bordered text-center">
 				  			<thead>
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 <!-- TITULOS DE LA TABLA -->  			
-				<table class="col-md-12 col-xs-12 table table-condensed table-bordered">
+				<table class="table table-condensed table-bordered">
 					<thead>
 					    <tr>
 					        <th class="text-right">Cantidad</th>
@@ -102,11 +102,13 @@
 			        </tbody>
 				</table>
 <!-- COMENTARIOS DEBAJO DE LA TABLA -->
-				<div t-if="o.note" class="col-md-12 col-xs-12">
-				    <p>
-				        <strong>Comentario:</strong>
-				        <span t-field="o.note"/>
-				    </p>        
+				<div t-if="o.note" class="row">
+					<div class="col-md-12 col-xs-12">
+					    <p>
+					        <strong>Comentario:</strong>
+					        <span t-field="o.note"/>
+					    </p>
+				    </div>
 				</div> 				
 			</div>
 		</t>
