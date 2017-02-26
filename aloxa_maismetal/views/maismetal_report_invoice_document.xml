@@ -3,25 +3,24 @@
 <data>
 
 	<template id="maismetal_report_invoice_document">
+		<t t-set="is_discount" t-value="False"/>
+		<!-- This is important, otherwise is_discount will only be visible inside the foreach-loop and be undefined thereafter -->
+		<t t-foreach="o.invoice_line" t-as="l">
+			<t t-if="l.discount"><t t-set="is_discount" t-value="True"/></t>
+		</t>
+				
 		<t t-call="aloxa_maismetal.maismetal_external_layout">
-			<div class="page">
-			
-				<link href="/web/static/lib/bootstrap/css/bootstrap.css" rel="stylesheet"/>
-				    
-				<t t-set="is_discount" t-value="False"/>
-				<!-- This is important, otherwise is_discount will only be visible inside the foreach-loop and be undefined thereafter -->
-				<t t-foreach="o.invoice_line" t-as="l">
-					<t t-if="l.discount"><t t-set="is_discount" t-value="True"/></t>
-				</t>
-					  
+			<div class="page">  
 				<div class="row"> 		    
 				    <div class="col-md-12" style="width:50%;float:right;">
 				     	<table class="table table-bordered" style="color:#00004e !important;">
-				        	<tr>
-				            	<td>
-				            		<address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>       
-				                </td>
-				            </tr>
+				     		<tbody>
+					        	<tr>
+					            	<td>
+					            		<address t-field="o.partner_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>       
+					                </td>
+					            </tr>
+				            </tbody>
 				    	</table>
 				    </div>    			     
 				</div>
@@ -29,31 +28,39 @@
 					
 				<div class="row">
 					<div class="col-md-12" style="width:100%;">
-						<table class="table table-bordered" style="text-align:center;color:#00004e !important;">
-							<tr>
-								<td><span t-if="o.type != 'out_refund'">Factura</span>
-			                    <span t-if="o.type == 'out_refund'"> Factura Rectificativa</span></td>
-				                <td>Fecha Factura</td>
-				                <td>Código de cliente</td>
-				                <td>NIF/CIF</td>
-				                <td>Descripción</td>
-				                <td>Origen</td>
-				            </tr>
-				            <tr>
-				            	 <td><span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
-				                 <span t-if="o.type == 'out_invoice' and not o.state == 'proforma2'"><p t-field="o.number"/></span>
-			                          <span t-if="o.type == 'out_refund' and not o.state == 'proforma2'"><p t-field="o.number"/></span></td>
-				                 <td><p t-field="o.date_invoice" t-field-options="{&quot;format&quot;: &quot;d/MM/y&quot;}"/></td>
-				                 <td><span t-field="o.partner_id.ref"/></td>
-				                 <td><span t-field="o.partner_id.vat"/></td>
-				                 <td><span t-field="o.name"/></td>
-				                 <td><span t-field="o.origin"/></td>                              
-				            </tr>	
+						<table class="col-md-12 col-xs-12 table table-bordered text-center" style="color:#00004e !important;">
+							<thead>
+								<tr>
+									<td>
+										<span t-if="o.type != 'out_refund'">Factura</span>
+				                    	<span t-if="o.type == 'out_refund'">Factura Rectificativa</span>
+				                    </td>
+					                <td>Fecha Factura</td>
+					                <td>Código de cliente</td>
+					                <td>NIF/CIF</td>
+					                <td>Descripción</td>
+					                <td>Origen</td>
+					            </tr>
+				            </thead>
+				            <tbody>
+					            <tr>
+					            	 <td>
+					            	 	<span t-if="o.type == 'out_invoice' and o.state == 'proforma2'">PRO-FORMA</span>
+					                 	<span t-if="o.type == 'out_invoice' and not o.state == 'proforma2'"><p t-field="o.number"/></span>
+				                        <span t-if="o.type == 'out_refund' and not o.state == 'proforma2'"><p t-field="o.number"/></span>  	
+				                     </td>
+					                 <td><p t-field="o.date_invoice" t-field-options="{&quot;format&quot;: &quot;d/MM/y&quot;}"/></td>
+					                 <td><span t-field="o.partner_id.ref"/></td>
+					                 <td><span t-field="o.partner_id.vat"/></td>
+					                 <td><span t-field="o.name"/></td>
+					                 <td><span t-field="o.origin"/></td>                              
+					            </tr>
+				            </tbody>	
 				        </table>
 					</div>
 				</div>
 					
-				<table class="table table-bordered">
+				<table class="table table-condensed table-bordered">
 					<thead>
 					    <tr>
 					        <th>Descripción</th>
@@ -80,7 +87,12 @@
 								<td class="text-right" groups="sale.group_discount_per_so_line"><t t-if="l.discount"><span t-field="l.discount"/></t></td>
 							</t>
 				            <td class="text-right">
-				                <span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))"/>
+				            	<t t-if="l.invoice_line_tax_id">
+				                	<span t-esc="', '.join(map(lambda x: x.name, l.invoice_line_tax_id))"/>
+				                </t>
+				                <t t-if="not l.invoice_line_tax_id">
+				                	<span>EXENTO</span>
+				                </t>
 				            </td>	                      
 				            <td class="text-right">
 				                 <span t-if="o.type == 'out_refund'">-</span><span t-field="l.price_subtotal" t-field-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: &quot;o.currency_id&quot;}"/>
