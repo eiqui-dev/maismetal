@@ -4,8 +4,10 @@
 
 	<template id="maismetal_external_layout_header">
 		<div class="header">
-			<div class="col-md-12 col-xs-12">    
-				<img class="img img-responsive" style="max-height: 120px" src="/aloxa_maismetal/static/src/img/maismetal.jpg"/>  
+			<div class="row">
+				<div class="col-md-12 col-xs-12">    
+					<img class="img img-responsive" style="max-height: 130px" src="/aloxa_maismetal/static/src/img/maismetal.jpg"/>  
+				</div>
 			</div>
 		</div>
 	</template>

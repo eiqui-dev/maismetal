@@ -58,6 +58,7 @@
         'data/data.xml',
         'data/res.groups.csv',
         'data/menus.xml',
+        'data/paper_formats.xml',
         'views/maismetal_report_invoice.xml',
         'views/maismetal_report_saleorder.xml',
         'views/maismetal_report_picking_document.xml',
